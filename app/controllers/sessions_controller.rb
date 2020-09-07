@@ -6,7 +6,16 @@ class SessionsController < ApplicationController
  
   post '/sessions' do 
     session[:username] = params[:username]
-    redirect to "/games"
+    
+    if session[:username].empty?
+      redirect to "/login"
+    else
+      redirect to "/games"
   end
+  
+  get '/logout'
+    session.clear
+  end
+  
   
 end
