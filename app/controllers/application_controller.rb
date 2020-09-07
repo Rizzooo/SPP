@@ -8,6 +8,8 @@ class ApplicationController < Sinatra::Base
   end 
   
   get '/' do
-    "Welcome to GameSleeve!"
+    redirect to "/login"
   end
+  
+  
 end
