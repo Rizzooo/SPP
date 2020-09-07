@@ -4,6 +4,8 @@ class GamesController < Sinatra::Base
     if session[:username].empty?
       redirect "/login"
     else 
+      @user = User.new(session[:username])
+      
       erb :homepage
     end
   end
@@ -12,10 +14,22 @@ class GamesController < Sinatra::Base
     erb :new
   end
   
-  post '/games/:id' do 
-    @game = Game(params)
+  # get '/games/:id' do
     
-    erb :display
-  end
+  # end
+  
+  # post '/games/:id' do 
+  #   @game = Game(params)
+    
+  #   erb :display
+  # end
+  
+  # get 'games/edit/:id' do 
+    
+  # end
+  
+  # patch 'games/edit/:id' do 
+    
+  # end
   
 end
