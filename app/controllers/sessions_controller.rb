@@ -7,10 +7,10 @@ class SessionsController < ApplicationController
   post '/sessions' do 
     session[:username] = params[:username]
     
-    if session[:username].empty?
-      redirect to "/login"
-    else
+    if logged_in?
       redirect to "/games"
+    else
+      redirect to "/login"
     end
   end
   

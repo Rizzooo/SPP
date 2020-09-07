@@ -1,12 +1,11 @@
-class GamesController < Sinatra::Base
+class GamesController < ApplicationController
   
   get '/games' do 
-    if session[:username].empty?
-      redirect "/login"
+    if logged_in?
+      erb :'/games/homepage'
     else 
-      @user = User.new(session[:username])
-      
-      erb :homepage
+      # @user = User.new(session[:username])
+      redirect "/login"
     end
   end
   
