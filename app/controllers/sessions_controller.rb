@@ -5,7 +5,7 @@ class SessionsController < ApplicationController
   end
  
   post '/sessions' do 
-    session[:username] = params[:username]
+    login(params[:username])
     
     if logged_in?
       redirect to "/games"
@@ -15,7 +15,7 @@ class SessionsController < ApplicationController
   end
   
   get '/logout' do
-    session.clear
+    logout
   end
   
 end
