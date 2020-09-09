@@ -1,3 +1,5 @@
+require './config/environment'
+
 class ApplicationController < Sinatra::Base
   
   configure do 
@@ -8,9 +10,13 @@ class ApplicationController < Sinatra::Base
   end 
   
   get '/' do
-    redirect to "/login"
+    redirect to "/home"
   end
   
+  get '/home' do 
+    erb :"/sessions/home"
+  end 
+
   helpers do 
     
     def logged_in?
@@ -24,6 +30,7 @@ class ApplicationController < Sinatra::Base
     def logout
       session.clear
     end
+
   end
-  
+
 end

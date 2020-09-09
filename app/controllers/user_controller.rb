@@ -1,6 +1,6 @@
 class UserController < ApplicationController
   
-  # get '/user'
+  # get '/user' do
   #   if 
       
   #   else
@@ -8,20 +8,18 @@ class UserController < ApplicationController
   #   end
   # end
   
-  # get '/user/:id'
+  get '/user/:id' do 
+    @user = User.find_by(params[:id])
+    erb :'/games/homepage'
+  end
   
-  # end
+  get '/user/edit/:id' do
+    @user = User.find_by(params[:id])
+    erb :'/users/update'
+  end
   
-  # post '/user/:id'
+  patch '/user/edit/:id' do
   
-  # end
-  
-  # get '/user/edit/:id'
-  
-  # end
-  
-  # patch '/user/edit/:id'
-  
-  # redirect to '/user/:id'
-  # end
+    redirect to '/user/:id'
+  end
 end

@@ -1,16 +1,16 @@
 class SessionsController < ApplicationController
   
-  get '/login' do 
-    erb :'sessions/login.html'
-  end
+  # get '/login' do 
+  #   erb :'sessions/login.html'
+  # end
  
   post '/sessions' do 
     login(params[:username])
     
     if logged_in?
-      redirect to "/games"
+      redirect to '/user/:id'
     else
-      redirect to "/login"
+      redirect to '/home'
     end
   end
   

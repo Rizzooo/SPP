@@ -10,25 +10,22 @@ class GamesController < ApplicationController
   end
   
   get '/games/new' do
-    erb :new
+    erb :'/games/new'
   end
   
-  # get '/games/:id' do
-    
-  # end
+  get '/games/:id' do
+    @game = Game.find_by(params[:id])
+    erb :'/games/display'
+  end
+
+  get 'games/edit/:id' do 
+    @game = Game.find_by(params[:id])
+    erb :'/games/update'
+  end
   
-  # post '/games/:id' do 
-  #   @game = Game(params)
+  patch 'games/edit/:id' do 
     
-  #   erb :display
-  # end
-  
-  # get 'games/edit/:id' do 
-    
-  # end
-  
-  # patch 'games/edit/:id' do 
-    
-  # end
+    redirect to '/games/:id'
+  end
   
 end
