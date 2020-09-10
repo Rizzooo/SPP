@@ -1,9 +1,9 @@
 <h1>What's Up, User!</h1>
 
 <h2>Your Games:</h2>
-    <p>Game - Release Year</p>
-    <p>Game - Release Year</p>
-    <p>Game - Release Year</p>
-    <p>Game - Release Year</p>
-    <p>Game - Release Year</p>
+    <%@games.each do |g|%>
+    <h1><%=g.title%> - <%=g.release_year%></h1>
+        <p><%=g.genre%></p>
+        <p>Rated: <%=g.rating%></p>
+    <%end%>
 
