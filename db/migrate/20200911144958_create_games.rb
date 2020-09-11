@@ -4,7 +4,7 @@ class CreateGames < ActiveRecord::Migration[6.0]
       t.string :title
       t.string :genre
       t.string :rating 
-      t.year :release_year
+      t.integer :release_year
     end
   end
 end

@@ -17,7 +17,9 @@ class GamesController < ApplicationController
 
   post '/games/new' do 
     @game = Game.create(params)
-    @game.save 
+    @user = session[:username]
+    @user.games << @game
+    
     redirect to '/games/#{@game.id}'
   end
   

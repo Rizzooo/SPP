@@ -12,7 +12,7 @@ class UserController < ApplicationController
   
   get '/user/:id' do 
     @user = User.find_by_id(params[:id])
-    @games = User.games.all
+    @games = Game.find_by(params[:user_id])
     erb :'/games/homepage'
   end
   
