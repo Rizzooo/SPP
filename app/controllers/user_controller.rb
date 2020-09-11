@@ -1,18 +1,18 @@
 class UserController < ApplicationController
   
   post '/user/signup' do
-    user = User.new(:username => params[:username], :password => params[:password])
+    @user = User.new(:username => params[:username], :password => params[:password])
 
-    if user.save 
-      redirect to '/login'
+    if @user.save 
+      redirect to '/user/#{@user.id}'
     else
       redirect to '/home' # Maybe failure message w/ links to sign-up or login
     end
   end
   
   get '/user/:id' do 
-    @user = User.find_by_id(params[:id])
-    @games = Game.find_by(params[:user_id])
+    @user = session[:id]
+    @games = Game.
     erb :'/games/homepage'
   end
   

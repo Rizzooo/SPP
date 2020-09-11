@@ -24,7 +24,8 @@ class ApplicationController < Sinatra::Base
     end
     
     def login(username)
-      session[:username] = username
+      username = session[:username]
+      # password = session[:password]
     end
 
     def logout

@@ -9,10 +9,11 @@ class SessionsController < ApplicationController
   end
  
   post '/sessions' do 
-    login(params[:username])
+    login(params[:username]) # , params[:password])
     
     if logged_in?
-      redirect to '/user/:id'
+      @user = User.find_by(params[:id])
+      redirect to '/user/#{@user.id}'
     else
       redirect to '/home' # Maybe failure message w/ links to sign-up / log-in
     end

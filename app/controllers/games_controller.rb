@@ -3,7 +3,7 @@ class GamesController < ApplicationController
   get '/games' do 
     if logged_in?
       @user = User.find_by_id(params[:id])
-      @games = User.games.all
+      # @games = Game.find_by(params[:user_id])
       erb :'/games/homepage'
     else 
       # @user = User.new(session[:username])
@@ -17,8 +17,8 @@ class GamesController < ApplicationController
 
   post '/games/new' do 
     @game = Game.create(params)
-    @user = session[:username]
-    @user.games << @game
+    @game.user = session[:username]
+    # @games << @game
     
     redirect to '/games/#{@game.id}'
   end
