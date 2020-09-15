@@ -1,18 +1,7 @@
 class User < ActiveRecord::Base 
-  attr_reader :username, :games
-  
+  # validates :username, :presence => true, :uniqueness => true
   has_secure_password
-  has_many :games
 
-  # def initialize
-  #   @games = []
-  # end
-
-  # def games 
-  #   @games
-  # end
-
-  # def save(game) 
-  #   @games << game
-  # end
+  has_many :games, through: :user_games
+  has_many :usergames
 end

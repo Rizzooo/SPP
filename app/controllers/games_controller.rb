@@ -2,7 +2,7 @@ class GamesController < ApplicationController
   
   get '/games' do 
     if logged_in?
-      @user = User.find_by_id(params[:id])
+      @user = User.find_by(params[:username])
       # @games = Game.find_by(params[:user_id])
       erb :'/games/homepage'
     else 
@@ -16,7 +16,7 @@ class GamesController < ApplicationController
   end
 
   post '/games/new' do 
-    @game = Game.create(params)
+    @game = Game.new(params)
     @game.user = session[:username]
     # @games << @game
     

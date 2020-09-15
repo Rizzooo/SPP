@@ -6,18 +6,19 @@ class UserController < ApplicationController
     if @user.save 
       redirect to '/user/#{@user.id}'
     else
-      redirect to '/home' # Maybe failure message w/ links to sign-up or login
+      erb :'/sessions/signup' # Maybe failure message w/ links to sign-up or login
     end
   end
   
   get '/user/:id' do 
-    @user = session[:id]
-    @games = Game.
+    @user = User.find_by(params[:username])
+    @games = Game.find_by(:user_id => @user.id)
+    
     erb :'/games/homepage'
   end
   
   get '/user/edit/:id' do
-    @user = User.find_by_id(params[:id])
+    @user = User.find_by(params[:username])
     erb :'/users/update'
   end
   
