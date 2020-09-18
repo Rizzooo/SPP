@@ -15,9 +15,11 @@ class GamesController < ApplicationController
     erb :'/games/new'
   end
 
-  post '/games/new' do 
-    @game = Game.new(params)
-    @game.user_id = session[:id]
+  post '/games/new_game' do 
+    @game = Game.create(params)
+    @game.user = session[:username]
+
+    binding.pry
     # @games << @game
     
     redirect to "/games/#{@game.id}"

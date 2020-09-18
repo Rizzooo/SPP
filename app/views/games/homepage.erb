@@ -2,9 +2,18 @@
 
 <h2>Your Games:</h2>
     <%@games.each do |g|%>
-    <h1><%=g.title%> - <%=g.release_year%></h1>
+    <h1><a href="/games/#{g.id}"><%=g.title%></a> - <%=g.release_year%></h1>
         <p><%=g.genre%></p>
         <p>Rated: <%=g.rating%></p>
     <%end%>
 
+    <p>New game? Add it to your collection <a href="/games/new">HERE!</a></p>
+
+
+
+    <p>Edit your games <a href="/games/edit/:id">HERE!</a></p> # Need to find a way to select individual games for update
+    <p>Change your username <a href="/users/edit/:id">HERE!</a></p>
+
 <%# Add links to visit different pages. # %>
+
+

@@ -1,6 +1,6 @@
 <h1> Update User </h1>
 
-<form action="/users/<%= @user.id %>" method="post">
+<form action="/users/<%=@user.id%>" method="post">
   <input id="hidden" type="hidden" name="_method" value="patch">
   <input type="text" name="username">
 
