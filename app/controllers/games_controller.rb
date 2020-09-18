@@ -2,7 +2,7 @@ class GamesController < ApplicationController
   
   get '/games' do 
     if logged_in?
-      @user = User.find_by(params[:username])
+      @user = User.find_by(params[:id])
       # @games = Game.find_by(params[:user_id])
       erb :'/games/homepage'
     else 
@@ -17,14 +17,14 @@ class GamesController < ApplicationController
 
   post '/games/new' do 
     @game = Game.new(params)
-    @game.user = session[:username]
+    @game.user_id = session[:id]
     # @games << @game
     
-    redirect to '/games/#{@game.id}'
+    redirect to "/games/#{@game.id}"
   end
   
   get '/games/:id' do
-    @game = Game.find_by_id(params[:id])
+    # @game = Game.find_by_id(params[:id])
     erb :'/games/display'
   end
 
@@ -40,7 +40,7 @@ class GamesController < ApplicationController
     @game.rating = params[:rating]
     @game.release_year = params[:release_year]
     @game.save
-    redirect to '/games/#{@game.id}'
+    redirect to "/games/#{@game.id}"
   end
   
 end

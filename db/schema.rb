@@ -10,19 +10,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_09_15_171523) do
+ActiveRecord::Schema.define(version: 2020_09_16_175727) do
 
   create_table "games", force: :cascade do |t|
     t.string "title"
     t.string "genre"
     t.string "rating"
     t.integer "release_year"
+    t.integer "user_id"
   end
 
   create_table "users", force: :cascade do |t|
     t.string "username"
     t.string "password_digest"
-    t.integer "age"
   end
 
 end

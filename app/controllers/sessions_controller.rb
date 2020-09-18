@@ -10,13 +10,11 @@ class SessionsController < ApplicationController
  
   post '/sessions' do 
     login(params[:username], params[:password])
-    
-    if logged_in?
-      @user = User.find_by_id(params[:id])
-      redirect to '/user/#{@user.id}'
-    else
-      redirect to '/login' # Maybe failure message w/ links to sign-up / log-in
-    end
+
+    @user = User.find_by(:username => params[:username])
+    # binding.pry
+
+    redirect to "/user/#{@user.id}"
   end
   
   get '/logout' do

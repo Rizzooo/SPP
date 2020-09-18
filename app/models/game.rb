@@ -1,4 +1,4 @@
 class Game < ActiveRecord::Base 
-  has_many :usergames
-  has_many :users, through: :usergames
+  # attr_reader :user_id
+  belongs_to :user
 end
