@@ -50,12 +50,12 @@ class UserController < ApplicationController
     @user = User.find_by(:id => params[:id])
     @user.username = params[:username]
     @user.save
+
     redirect to "/user/#{@user.id}"
   end
 
   delete '/user/:id' do 
-    @user = User.find_by(:username => params[:username])
-    @user.destroy
+    User.find_by(:username => session[:username]).destroy
 
     redirect to "/home"
   end

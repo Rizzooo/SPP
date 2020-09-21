@@ -1,18 +1,19 @@
 <h1>Update Game</h1>
 
-<form action="/games/<%=@game.id%>" method="POST">
+<form action="/games/edit/<%=@game.id%>" method="POST">
     <input id="hidden" type="hidden" name="_method" value="patch">
+    
     <label for="title">Title:</label>
-    <input type="text" name="title">
+    <input type="text" name="title" value="<%=@game.title%>">
 
     <label for="genre">Genre:</label>
-    <input type="text" name="genre">
+    <input type="text" name="genre" value="<%=@game.genre%>">
 
     <label for="rating">Rating:</label>
-    <input type="text" name="rating">
+    <input type="text" name="rating" value="<%=@game.rating%>">
 
     <label for="release_year">Release Year:</label>
-    <input type="year" name="release_year">
+    <input type="year" name="release_year" value="<%=@game.release_year%>">
     
     <input type="submit" value="submit">
 </form>

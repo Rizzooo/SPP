@@ -5,11 +5,12 @@
     <h1><%=g.title%> - <%=g.release_year%></h1>
         <h3><%=g.genre%></h3>
         <h4>Rated: <%=g.rating%></h4>
+        <p><a href="/games/edit/<%=g.id%>">Edit this game</a></p> 
+        <p><a href="/logout">Logout</a></p> 
     <%end%>
 
 
     <p>New game? Add it to your collection <a href="/games/new">HERE!</a></p>
-    <p>Edit your games <a href="/games/edit/:id">HERE!</a></p>
     <p>Change your username <a href="/user/edit/:id">HERE!</a></p>
 
     

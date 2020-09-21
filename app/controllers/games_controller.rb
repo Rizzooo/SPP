@@ -36,12 +36,9 @@ class GamesController < ApplicationController
     erb :'/games/display'
   end
 
-  get 'games/update' do 
-    erb :'/games/update'
-  end
-
   get '/games/edit/:id' do 
     @game = Game.find_by(:id => params[:id])
+
     erb :'/games/update'
   end
   
@@ -50,9 +47,9 @@ class GamesController < ApplicationController
 
     # Check if empty?
     @game.title = params[:title]
-    @game.genre = params[:genre]
-    @game.rating = params[:rating]
-    @game.release_year = params[:release_year]
+    @game.genre = params[:genre] 
+    @game.rating = params[:rating] 
+    @game.release_year = params[:release_year] 
     @game.save
 
     redirect to "/games/#{@game.id}"
