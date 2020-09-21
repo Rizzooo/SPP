@@ -2,3 +2,12 @@
 <h2><%=@game.rating%></h2>
 
 <h3><%=@game.release_year%></h3> 
+
+    <form action="/games/<%=@game.id%>" method="POST">
+        <input id="hidden" type="hidden" name="_method" value="delete">
+        <input type="submit" value="delete">
+    </form>
+
+
+<p><a href='/games/edit/<%=@game.id%>'>EDIT GAME</a></p>
+<p><a href="/user/homepage">ALL GAMES</a></p>

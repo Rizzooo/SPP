@@ -1,19 +1,26 @@
-<h1>What's Up, <%=@user.username%></h1>
+<h1>What's Up, <%=@user.username%>!</h1>
 
 <h2>Your Games:</h2>
-    <%@games.each do |g|%>
-    <h1><a href="/games/#{g.id}"><%=g.title%></a> - <%=g.release_year%></h1>
-        <p><%=g.genre%></p>
-        <p>Rated: <%=g.rating%></p>
+    <%if @games.empty? == false%>
+        <%@games.each do |g|%>
+        <h1><a href="/games/#{g.id}"><%=g.title%></a> - <%=g.release_year%></h1>
+            <h3><%=g.genre%></h3>
+            <h4>Rated: <%=g.rating%></h4>
+        <%end%>
+    <%else%>
+        <h1>You don't have any games yet! Add some below!
     <%end%>
 
+
     <p>New game? Add it to your collection <a href="/games/new">HERE!</a></p>
+    <p>Edit your games <a href="/games/edit/:id">HERE!</a></p>
+    <p>Change your username <a href="/user/edit/:id">HERE!</a></p>
 
-
-
-    <p>Edit your games <a href="/games/edit/:id">HERE!</a></p> # Need to find a way to select individual games for update
-    <p>Change your username <a href="/users/edit/:id">HERE!</a></p>
-
-<%# Add links to visit different pages. # %>
+    
+    <h5>DELETE ACCOUNT</h5>
+    <form action="/user/<%=@user.id %>" method="POST">
+        <input id="hidden" type="hidden" name="_method" value="delete">
+        <input type="submit" value="delete">
+    </form>
 
 
