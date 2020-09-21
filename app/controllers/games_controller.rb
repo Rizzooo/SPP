@@ -18,9 +18,12 @@ class GamesController < ApplicationController
 
   post '/games/new_game' do 
     @game = Game.create(params)
-
     user = User.find_by(:username => session[:username])
+
     @game.user_id = user.id
+    @game.save
+
+    binding.pry
     
     redirect to "/games/#{@game.id}"
   end
@@ -57,9 +60,7 @@ class GamesController < ApplicationController
 
   delete '/games/:id' do 
     @game = Game.find_by(:id => params[:id])
-    @game.delete
-
-    binding.pry
+    @game.destroy
 
     @user = User.find_by(:username => session[:username])
     redirect to "/user/#{@user.id}"

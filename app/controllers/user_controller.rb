@@ -15,6 +15,8 @@ class UserController < ApplicationController
     if logged_in?
       @user = User.find_by(:username => session[:username])
       @games = []
+
+      # binding.pry
       
       Game.all.each do |g|
         if g.user_id == @user.id
@@ -31,20 +33,12 @@ class UserController < ApplicationController
   end
 
   get '/user/homepage' do 
-    if logged_in?
-      @user = User.find_by(:username => session[:username])
-      @games = []
-      
-      Game.all.each do |g|
-        if g.user_id == @user.id
-          @games << g 
-        end
-      end
+    @user = User.find_by(:username => session[:username])
+    @games = Game.all.find_by(:user_id => @user.id)
+
+    # binding.pry
 
     erb :'/games/homepage'
-    else 
-      redirect to '/home'
-    end
   end
   
   get '/user/edit/:id' do
@@ -61,7 +55,7 @@ class UserController < ApplicationController
 
   delete '/user/:id' do 
     @user = User.find_by(:username => params[:username])
-    @user.delete
+    @user.destroy
 
     redirect to "/home"
   end

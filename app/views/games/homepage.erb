@@ -1,14 +1,10 @@
 <h1>What's Up, <%=@user.username%>!</h1>
 
 <h2>Your Games:</h2>
-    <%if @games.empty? == false%>
-        <%@games.each do |g|%>
-        <h1><a href="/games/#{g.id}"><%=g.title%></a> - <%=g.release_year%></h1>
-            <h3><%=g.genre%></h3>
-            <h4>Rated: <%=g.rating%></h4>
-        <%end%>
-    <%else%>
-        <h1>You don't have any games yet! Add some below!
+    <%@games.each do |g|%>
+    <h1><%=g.title%> - <%=g.release_year%></h1>
+        <h3><%=g.genre%></h3>
+        <h4>Rated: <%=g.rating%></h4>
     <%end%>
 
 

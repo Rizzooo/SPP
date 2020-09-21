@@ -16,3 +16,7 @@ gem 'shotgun'
 gem 'bcrypt'
 gem 'tux'
 
+group :development, :test do 
+    gem 'dotenv'
+    gem 'session_secret_generator'
+end
