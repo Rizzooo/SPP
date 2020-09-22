@@ -9,7 +9,7 @@ class UserController < ApplicationController
 
     if @user.save 
       session[:user_id] = @user.id
-      binding.pry
+      # binding.pry
       redirect to "/user/#{@user.id}"
     else
       redirect to "/user/signup"
@@ -48,7 +48,7 @@ class UserController < ApplicationController
   
   get '/user/edit/:id' do
     @user = User.find(session[:user_id])
-    binding.pry
+    # binding.pry
     erb :'/users/update'
   end
   

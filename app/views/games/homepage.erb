@@ -1,10 +1,12 @@
-<h1>What's Up, <%=@user.username%>!</h1>
+<h1>Welcome, <%=@user.username%>!</h1>
 
 <h2>Your Games:</h2>
     <%@games.each do |g|%>
     <h1><%=g.title%> - <%=g.release_year%></h1>
         <h3><%=g.genre%></h3>
         <h4>Rated: <%=g.rating%></h4>
+
+        <p><a href='/games/<%=g.id%>'>EDIT GAME</a></p>
     <%end%>
 
     <p><a href="/user/<%=@user.id%>/logout">Logout</a></p> 

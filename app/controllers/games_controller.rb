@@ -18,13 +18,13 @@ class GamesController < ApplicationController
 
   post '/games/new_game' do 
     @game = Game.new(params)
-    binding.pry
+    # binding.pry
     user = User.find(session[:user_id])
 
     @game.user_id = user.id
     @game.save
 
-    binding.pry
+    # binding.pry
     
     redirect to "/games/#{@game.id}"
   end
