@@ -1,53 +1,47 @@
 class GamesController < ApplicationController
-  
-  # get '/games' do 
-  #   if logged_in?
-  #     @user = User.find_by(:id => params[:id])
-  #     @games = Game.find_by(:user_id => @user.id)
-
-  #     erb :'/games/homepage'
-  #   else 
-  #     # @user = User.new(session[:username])
-  #     redirect "/login"
-  #   end
-  # end
-  
   get '/games/new' do
-    erb :'/games/new'
+    if logged_in?
+      erb :'/games/new'
+    else 
+      redirect to '/user/login'
+    end
   end
 
   post '/games/new_game' do 
-    @game = Game.new(params)
-    # binding.pry
-    user = User.find(session[:user_id])
+    if logged_in?
+      @game = Game.new(params)
+      user = User.find(session[:user_id])
 
-    @game.user_id = user.id
-    @game.save
-
-    # binding.pry
-    
-    redirect to "/games/#{@game.id}"
+      @game.user_id = user.id
+      @game.save
+      redirect to "/games/#{@game.id}"
+    else  
+      redirect to '/user/login'
+    end
   end
   
-  get '/games/:id' do
-    @game = Game.find_by(:id => params[:id])
-    @user = User.find(session[:user_id])
-
-    # binding.pry
-
-    erb :'/games/display'
+  get '/games/:id' do 
+    if logged_in? 
+      @game = Game.find_by(:id => params[:id])
+      @user = User.find(session[:user_id])
+      erb :'/games/display'
+    else  
+      redirect to '/user/login'
+    end
   end
 
   get '/games/edit/:id' do 
-    @game = Game.find_by(:id => params[:id])
-
-    erb :'/games/update'
+    if logged_in? 
+      @game = Game.find_by(:id => params[:id])
+      erb :'/games/update'
+    else  
+      redirect to '/user/login'
+    end
   end
   
   patch '/games/edit/:id' do 
     @game = Game.find_by(:id => params[:id])
 
-    # Check if empty?
     @game.title = params[:title]
     @game.genre = params[:genre] 
     @game.rating = params[:rating] 

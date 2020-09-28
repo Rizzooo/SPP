@@ -9,7 +9,6 @@ class UserController < ApplicationController
 
     if @user.save 
       session[:user_id] = @user.id
-      # binding.pry
       redirect to "/user/#{@user.id}"
     else
       redirect to "/user/signup"
@@ -21,35 +20,30 @@ class UserController < ApplicationController
   end
   
   get '/user/:id' do 
-    @user = User.find(session[:user_id])
-    @games = []
-
-    # binding.pry
+    if logged_in?
+      @user = User.find(session[:user_id])
+      @games = []
       
-    Game.all.each do |g|
-      if g.user_id == @user.id
-        @games << g 
-      end
-    end
+      Game.all.each do |g|
+        if g.user_id == @user.id
+          @games << g 
+        end
 
-    erb :'/games/homepage'
+        erb :'/games/homepage'
+      end
+
+    else 
+      redirect to '/user/login'
+    end
   end
 
-  # get '/user/homepage' do 
-  #   @user = User.find(session[:user_id])
-  #   @games = []
-
-  #   Game.all.each do |g|
-  #     if g.user_id == session[:user_id]
-  #       @games << g 
-  #     end
-  #   erb :'/games/homepage'
-  # end
-  
   get '/user/edit/:id' do
-    @user = User.find(session[:user_id])
-    # binding.pry
-    erb :'/users/update'
+    if logged_in?
+      @user = User.find(session[:user_id])
+      erb :'/users/update'
+    else  
+      redirect to '/user/login'
+    end
   end
   
   patch '/user/edit/:id' do
