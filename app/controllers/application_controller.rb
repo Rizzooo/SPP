@@ -5,7 +5,7 @@ class ApplicationController < Sinatra::Base
     set :public_folder, 'public'
     set :views, 'app/views'
     enable :sessions
-    set :session_secret, `ENV['SESSION_SECRET']`
+    set :session_secret, ENV['SESSION_SECRET']
   end 
   
   get '/' do
@@ -19,6 +19,13 @@ class ApplicationController < Sinatra::Base
   helpers do 
     def logged_in?
       !!session[:user_id]
+    end
+
+    def redirect_if_not_logged_in
+      # binding.pry
+      if !logged_in?
+        redirect to '/user/signup'
+      end 
     end
     
     def logout

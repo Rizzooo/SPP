@@ -5,8 +5,9 @@ class UserController < ApplicationController
   end
 
   post '/user/signup' do
+    
     @user = User.new(:username => params[:username], :password => params[:password])
-
+      # binding.pry
     if @user.save 
       session[:user_id] = @user.id
       redirect to "/user/#{@user.id}"
@@ -20,30 +21,24 @@ class UserController < ApplicationController
   end
   
   get '/user/:id' do 
-    if logged_in?
-      @user = User.find(session[:user_id])
-      @games = []
-      
-      Game.all.each do |g|
-        if g.user_id == @user.id
-          @games << g 
-        end
-
-        erb :'/games/homepage'
+    redirect_if_not_logged_in
+    # binding.pry
+    @user = User.find(session[:user_id])
+    @games = []
+    # binding.pry
+    Game.all.each do |g|
+      if g.user_id == @user.id
+        @games << g 
       end
-
-    else 
-      redirect to '/user/login'
     end
+    erb :'/games/homepage'
   end
 
   get '/user/edit/:id' do
-    if logged_in?
-      @user = User.find(session[:user_id])
-      erb :'/users/update'
-    else  
-      redirect to '/user/login'
-    end
+    redirect_if_not_logged_in
+
+    @user = User.find(session[:user_id])
+    erb :'/users/update'
   end
   
   patch '/user/edit/:id' do
